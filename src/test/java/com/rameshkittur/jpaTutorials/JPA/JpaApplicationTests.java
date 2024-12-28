@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class JpaApplicationTests {
@@ -63,6 +64,12 @@ class JpaApplicationTests {
 	void getProductWithGivenPriceAndQuantity(){
 		List<ProductEntity>productEntities = productRepository.findByPriceGreaterThanOrQuantityLessThan(BigDecimal.valueOf(13.5),100);
 		System.out.println(productEntities);
+	}
+
+	@Test
+	void getProductWithGivenPriceAndTitle(){
+		Optional<ProductEntity>productEntitie = productRepository.findByTitlePrice("Coke",BigDecimal.valueOf(12.4));
+		if(productEntitie.isPresent()) System.out.println(productEntitie);
 	}
 
 }
